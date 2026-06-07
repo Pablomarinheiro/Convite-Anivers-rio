@@ -377,7 +377,7 @@ body::before {
   font-family: "Barlow Condensed", sans-serif;
   font-size: 0.7rem;
   letter-spacing: 4px;
-  color: var(--pink);
+  color: white;
   text-transform: uppercase;
   font-weight: 700;
   display: block;
