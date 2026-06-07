@@ -1,0 +1,615 @@
+:root {
+  --bg-dark: #0d0d0d;
+  --bg-card: #141414;
+  --orange: #ff6b1a;
+  --orange-glow: rgba(255, 107, 26, 0.25);
+  --orange-dim: rgba(255, 107, 26, 0.08);
+  --pink: #ff3d78;
+  --pink-glow: rgba(255, 61, 120, 0.2);
+  --white: #f5f5f0;
+  --muted: #888880;
+  --border: rgba(255, 107, 26, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Barlow", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---- Textura de quadra (linhas) ---- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 107, 26, 0.04) 60px,
+      rgba(255, 107, 26, 0.04) 61px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 107, 26, 0.04) 60px,
+      rgba(255, 107, 26, 0.04) 61px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+}
+
+/* ---- HERO ---- */
+.hero {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Meio-círculo da quadra */
+.hero::before {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  border: 2px solid rgba(255, 107, 26, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Arco da linha de 3 pontos */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border: 2px solid rgba(255, 107, 26, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 107, 26, 0.18) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.hero-bg-glow-pink {
+  position: absolute;
+  top: 120px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 61, 120, 0.14) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---- Cena de basquete animada ---- */
+.basket-scene {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 260px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 30px 25px 50px;
+  width: 100%;
+}
+
+.hero-number {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 9rem;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--orange);
+  letter-spacing: -2px;
+  opacity: 0.18;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-dim);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.hero-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: var(--white);
+  animation: fadeUp 0.8s ease 0.25s both;
+  margin-bottom: 6px;
+}
+
+.hero-title span {
+  color: var(--orange);
+}
+
+.hero-subtitle {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  padding: 0 20px;
+  animation: fadeUp 0.8s ease 0.4s both;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Linha de pista */
+.court-line {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--orange),
+    var(--pink),
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* ---- DETAILS ---- */
+.details {
+  padding: 35px 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* canto decorativo */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-top: 2px solid var(--orange);
+  border-left: 2px solid var(--orange);
+  border-top-left-radius: 4px;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  border-bottom: 2px solid var(--pink);
+  border-right: 2px solid var(--pink);
+  border-bottom-right-radius: 4px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.detail-item {
+  flex: 1;
+}
+
+.detail-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--white);
+}
+
+.detail-subvalue {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.divider-v {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--border),
+    transparent
+  );
+  flex-shrink: 0;
+}
+
+.venue-row {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 22px;
+  margin-top: 8px;
+}
+
+.venue-name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.venue-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.btn-maps {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  padding: 10px 22px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  margin-top: 18px;
+  transition: all 0.25s ease;
+}
+
+.btn-maps:hover {
+  background: var(--orange);
+  color: var(--bg-dark);
+}
+
+/* ---- RSVP ---- */
+.rsvp {
+  padding: 40px 20px 60px;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, #0a0a0a 100%);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-eyebrow {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--pink);
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+.form-control {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: "Barlow", sans-serif;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  background-color: var(--bg-card);
+  color: var(--white);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-control::placeholder {
+  color: #444;
+}
+
+.form-control:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-glow);
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23ff6b1a' d='M0 0l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+}
+
+select.form-control option {
+  background: #1a1a1a;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.radio-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-card);
+  padding: 13px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 8px;
+}
+
+.radio-option:has(input:checked) {
+  border-color: var(--orange);
+  background: var(--orange-dim);
+}
+
+.radio-option input[type="radio"] {
+  display: none;
+}
+
+.radio-option .ball-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.25s ease;
+  filter: grayscale(0.6) brightness(0.7);
+}
+
+.radio-option:has(input:checked) .ball-icon {
+  transform: scale(1.25) rotate(-18deg);
+  filter: grayscale(0) brightness(1)
+    drop-shadow(0 0 7px rgba(255, 107, 26, 0.9));
+}
+
+.radio-option span {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#companions_section {
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  color: var(--white);
+  border: none;
+  padding: 17px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition:
+    opacity 0.3s ease,
+    transform 0.1s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-submit:hover::after {
+  opacity: 1;
+}
+
+.btn-submit:active {
+  transform: scale(0.99);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- Feedback ---- */
+.alert {
+  display: none;
+  padding: 25px 20px;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.alert-success {
+  display: block;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 26, 0.15),
+    rgba(255, 61, 120, 0.1)
+  );
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+}
+
+.alert-success small {
+  display: block;
+  font-family: "Barlow", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ---- Footer ---- */
+.footer-credit {
+  text-align: center;
+  padding: 20px 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+/* ---- Decoração numérica de jogadora ---- */
+.jersey-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--orange);
+  border-radius: 3px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  color: var(--orange);
+  margin-bottom: 12px;
+  position: relative;
+  background: var(--orange-dim);
+  letter-spacing: -1px;
+}
