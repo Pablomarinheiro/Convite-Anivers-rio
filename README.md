@@ -1,0 +1,1 @@
+Este convite de 15 anos tem tema de basquete, visual para celular e animação de bola na cesta. O formulário de RSVP muda conforme as respostas e salva tudo no Google Sheets por meio do Apps Script. Para rodar, basta clonar o código, criar a planilha com o script, gerar o link público, colá-lo no JavaScript e abrir o arquivo index.html no navegador.
